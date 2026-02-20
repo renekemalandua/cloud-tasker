@@ -1,0 +1,17 @@
+.git
+.gitignore
+.dockerignore
+.github
+.vscode
+.idea
+target/
+!target/*.jar
+Dockerfile
+docker-compose.yml
+README.md
+HELP.md
+mvnw
+mvnw.cmd
+.mvn/
+node_modules
+dist

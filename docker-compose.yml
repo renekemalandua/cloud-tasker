@@ -1,0 +1,44 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: cloudtasker-db
+    environment:
+      POSTGRES_USER: cloudtasker
+      POSTGRES_PASSWORD: cloudtasker
+      POSTGRES_DB: cloudtasker
+    ports:
+      - '5432:5432'
+    volumes:
+      - cloudtasker-data:/var/lib/postgresql/data
+    networks:
+      - cloudtaskernet
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U cloudtasker']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: renekemalandua/cloudtasker-spring-api:latest
+    container_name: cloudtasker-api
+    ports:
+      - '8080:8080'
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/cloudtasker
+      SPRING_DATASOURCE_USERNAME: cloudtasker
+      SPRING_DATASOURCE_PASSWORD: cloudtasker
+    networks:
+      - cloudtaskernet
+
+volumes:
+  cloudtasker-data:
+
+networks:
+  cloudtaskernet:
+    driver: bridge
