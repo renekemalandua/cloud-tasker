@@ -2,7 +2,7 @@
 
 [![CI/CD Pipeline](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-blue?logo=github-actions)](https://github.com/renekemalandua/cloud-tasker)
 [![Kubernetes Ready](https://img.shields.io/badge/Orchestration-Kubernetes-blue?logo=kubernetes)](https://kubernetes.io/)
-[![Spring Boot](https://img.shields.io/badge/Framework-Spring%20Boot%203-brightgreen?logo=springboot)](https://spring.io/projects/spring-boot)
+[![Spring Boot](https://img.shields.io/badge/Framework-Spring%20Boot%204.0.3-brightgreen?logo=springboot)](https://spring.io/projects/spring-boot)
 
 CloudTasker é uma API RESTful de nível industrial para gerenciamento de tarefas, projetada com foco em **escalabilidade, observabilidade e portabilidade**. Não é apenas um CRUD; é uma demonstração de arquitetura robusta integrando Java moderno com ecossistema Cloud Native.
 
@@ -103,6 +103,24 @@ Nosso workflow no GitHub Actions garante a integridade de cada entrega:
 | `GET` | `/tasks` | Recuperação paginada de tarefas |
 | `PUT` | `/tasks/{id}` | Atualização de estado/conteúdo |
 | `DELETE` | `/tasks/{id}` | Remoção física da tarefa |
+
+---
+
+## 🧪 Qualidade & Testes
+
+**Testes Unitários (Service)**
+Validação da lógica de negócio isolada usando Mockito.
+`mvn test -Dtest=TaskServiceTest`
+
+**Testes de API (Web Slice)**
+Validação de endpoints, status codes e contratos JSON.
+`mvn test -Dtest=TaskControllerTest`
+
+**Testes de Persistência (Data JPA)**
+Validação de persistência e auditoria com H2 em memória.
+`mvn test -Dtest=TaskRepositoryTest`
+
+**Executar Todos os Testes:** `mvn clean test`
 
 ---
 
