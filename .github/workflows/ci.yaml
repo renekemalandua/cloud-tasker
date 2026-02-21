@@ -1,0 +1,53 @@
+name: Cloud Tasker Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  quality-checks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Check code formatting (Spotless)
+        run: |
+          echo "🔍 Checking code formatting with Spotless..."
+          mvn spotless:check
+          echo "✅ Code formatting verified successfully!"
+
+      - name: Build & Test
+        run: mvn clean verify spotless:check
+
+  build-docker:
+    runs-on: ubuntu-latest
+    needs: quality-checks
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Log in to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        id: docker_build
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: renekemalandua/cloudtasker-spring-api:1.0.0
