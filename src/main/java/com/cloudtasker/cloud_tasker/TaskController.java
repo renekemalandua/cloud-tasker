@@ -1,44 +1,39 @@
 package com.cloudtasker.cloud_tasker;
 
-import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/tasks")
-public class TaskController
-{
-	private final TaskService service;
+public class TaskController {
+  private final TaskService service;
 
-	public TaskController(TaskService service)
-	{
-		this.service = service;
-	}
+  public TaskController(TaskService service) {
+    this.service = service;
+  }
 
-	@PostMapping
-	public Task create(@RequestBody Task task)
-	{
-		return service.create(task);
-	}
+  @PostMapping
+  public Task create(@RequestBody Task task) {
+    return service.create(task);
+  }
 
-	@GetMapping
-	public List<Task> list()
-	{
-		return service.list();
-	}
+  @GetMapping
+  public List<Task> list() {
+    return service.list();
+  }
 
-	@GetMapping("/{id}")
-	public Task find(@PathVariable Long id)
-	{
-		return service.find(id);
-	}
+  @GetMapping("/{id}")
+  public Task find(@PathVariable Long id) {
+    return service.find(id);
+  }
 
-	@PutMapping("/{id}")
-    public Task update(@PathVariable Long id, @RequestBody Task task) {
-        return service.update(id, task);
-    }
+  @PutMapping("/{id}")
+  public Task update(@PathVariable Long id, @RequestBody Task task) {
+    return service.update(id, task);
+  }
 
-	@DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        service.delete(id);
-    }
+  @DeleteMapping("/{id}")
+  public void delete(@PathVariable Long id) {
+    service.delete(id);
+  }
 }
