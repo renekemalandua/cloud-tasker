@@ -110,17 +110,26 @@ Nosso workflow no GitHub Actions garante a integridade de cada entrega:
 
 **Testes Unitários (Service)**
 Validação da lógica de negócio isolada usando Mockito.
-`mvn test -Dtest=TaskServiceTest`
+```bash
+mvn test -Dtest=TaskServiceTest
+```
 
 **Testes de API (Web Slice)**
 Validação de endpoints, status codes e contratos JSON.
-`mvn test -Dtest=TaskControllerTest`
+```bash
+mvn test -Dtest=TaskControllerTest
+```
 
 **Testes de Persistência (Data JPA)**
 Validação de persistência e auditoria com H2 em memória.
-`mvn test -Dtest=TaskRepositoryTest`
+```bash
+mvn test -Dtest=TaskRepositoryTest
+```
 
-**Executar Todos os Testes:** `mvn clean test`
+**Executar Todos os Testes:**
+```bash
+mvn clean test
+```
 
 ---
 
