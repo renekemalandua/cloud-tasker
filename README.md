@@ -133,6 +133,22 @@ mvn clean test
 
 ---
 
+## 💅 Padronização de Código (Spotless)
+
+Utilizamos o **Spotless** com o **Google Java Format** para manter o código limpo e consistente.
+
+**Formatar o código automaticamente:**
+```bash
+mvn spotless:apply
+```
+
+**Verificar se o código segue o padrão:**
+```bash
+mvn spotless:check
+```
+
+---
+
 ## 🎯 Visão Estratégica
 Este projeto não é um exercício de código, é um modelo de **Plataforma**. O foco é reduzir o *time-to-market* garantindo que a infraestrutura seja tão sólida quanto o código de negócio.
 
