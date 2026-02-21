@@ -7,7 +7,6 @@ on:
 jobs:
   quality-checks:
     runs-on: ubuntu-latest
-    if: github.base_ref == 'refs/heads/develop'
 
     steps:
       - name: Checkout
